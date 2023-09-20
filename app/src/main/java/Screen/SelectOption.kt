@@ -31,6 +31,7 @@ fun SelectOption(
     subtotal: String,
     options: List<String>,
     onSelectionChanged: (String) -> Unit = {},
+    //hàm lambda sẽ nhận chuối là tham số
     onCancelButtonClicked: () -> Unit = {},
     onNextButtonClicked: () -> Unit = {},
     modifier: Modifier = Modifier
@@ -43,12 +44,16 @@ fun SelectOption(
     ) {
         Column(modifier = Modifier.padding(16.dp)){
             options.forEach { item ->
+                //duyệt qua mỗi tuỳ chọn trong danh sách
                 Row(
                     modifier = Modifier.selectable(
                         selected = selectedValue == item,
+                        //trạng thái thiết lập dựa trên selectedValue có bằng với item hay không?
                         onClick = {
                             selectedValue = item
+                            //nếu user click vào hàng thì sẽ được cập nhật thành item đã được chọn
                             onSelectionChanged(item)
+                            //sẽ gọi cái hàm mà được chọn với tham số item được cho vào
                         }
                     ),
                     verticalAlignment = Alignment.CenterVertically
@@ -85,13 +90,16 @@ fun SelectOption(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalAlignment = Alignment.Bottom
         ){
-            OutlinedButton(modifier = Modifier.weight(1f), onClick = onCancelButtonClicked) {
+            OutlinedButton(
+                modifier = Modifier.weight(1f),
+                onClick = onCancelButtonClicked) {
                 Text(stringResource(R.string.cancel))
             }
             Button(
                 modifier = Modifier.weight(1f),
                 // the button is enabled when the user makes a selection
                 enabled = selectedValue.isNotEmpty(),
+                //Phải chọn rồi mới được phép ấn
                 onClick = onNextButtonClicked
             ) {
                 Text(stringResource(R.string.next))

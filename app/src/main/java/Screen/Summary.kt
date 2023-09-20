@@ -32,11 +32,16 @@ fun OrderSummary(
     modifier: Modifier = Modifier
 ){
     val resources = LocalContext.current.resources
+    //đại diện cho tài nguyên
 
+    //Biến nhận chuỗi tương ứng với số lượng được đặt
     val numberOfCupcakes = resources.getQuantityString(
         R.plurals.cupcakes,
+        //Xác đinh loại chuỗi dựa trên số lượng
         orderUiState.quantity,
+        //Số lượng đặt hiện tại
         orderUiState.quantity
+        //Số lượng đặt hiện tại nhưng đặt dự phòng nếu ko tìm thấy chuỗi phù hợp
     )
     //Load and format a string resource with the parameters.
     val orderSummary = stringResource(
@@ -46,7 +51,10 @@ fun OrderSummary(
         orderUiState.date,
         orderUiState.quantity
     )
+    //Lấy chuỗi từ string.xml
     val newOrder = stringResource(R.string.new_cupcake_order)
+    //Cách lấy một chuối từ chuỗi tài nguyên tương ứng
+
     //Create a list of order summary to display
     val items = listOf(
         // Summary line 1: display selected quantity
